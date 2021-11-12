@@ -5,13 +5,19 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "src/app.js"
+    "start": "nodemon src/server.js"
   },
   "author": "Marco Targino",
   "license": "ISC",
   "devDependencies": {
     "axios": "^0.24.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "mongoose": "^6.0.12",
     "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "env": "^0.0.2"
   }
 }
