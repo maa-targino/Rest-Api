@@ -1,4 +1,4 @@
-const User = require('./model')
+const Deal = require('./model')
 
 class Controller {
 
@@ -17,14 +17,15 @@ class Controller {
         }
     }
 
-    async userPost(req, res){
+    async dealPost(req, res){
 
-        const user = new User({
-            name: req.body.name,
-            email: req.body.email
+        const deal = new Deal({
+            price: req.body.price,
+            quantity: req.body.quantity,
+            amount: req.body.amount
         })
         try{
-            const saved = await user.save()
+            const saved = await deal.save()
                 res.json(saved)
         }
         catch(error){
@@ -32,7 +33,7 @@ class Controller {
         }
     }
 
-    async userGet(req, res){
+    async dealGet(req, res){
 
     }
 }

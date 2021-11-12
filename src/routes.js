@@ -5,7 +5,7 @@ const model = require('./model')
 
 routes.get('/home', controller.home)
 routes.get('/status', controller.status)
-routes.post('/user', controller.userPost)
-routes.post('/consult', controller.userGet)
+routes.post('/user', controller.dealPost)
+routes.post('/consult', controller.dealGet)
 
 module.exports = routes

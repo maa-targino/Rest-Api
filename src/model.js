@@ -1,9 +1,10 @@
 const mongoose = require('mongoose')
 
-const User = mongoose.Schema({
-    name: {type: String, required: true},
-    email: {type: String, required: true},
+const Deal = mongoose.Schema({
+    price: {type: Number, required: true},
+    quantity: {type: Number, required: true},
+    amount: {type: Number, default: function(){ return this.price * this.quantity }},
     date: {type: Date, default: Date.now}
 })
 
-module.exports = mongoose.model('Users', User)
+module.exports = mongoose.model('Deals', Deal)
