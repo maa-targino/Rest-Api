@@ -1,21 +1,15 @@
-require ('dotenv/config')
-const PORT = process.env.PORT || 3000
+require('dotenv/config')
+const app = require('./app')
 const mongoose = require('mongoose')
-const express = require('express')
-const app = express()
-app.use(express.json())
-const routes = require('./routes')
-app.use('/', routes)
-const cors = require ('cors')
-app.use(cors())
+const PORT = process.env.PORT || 3000
 
 mongoose
-.connect(
-    process.env.MLAB_URI, { 
+.connect(process.env.MLAB_URI, { 
         useNewUrlParser: true, 
         useUnifiedTopology: true 
-    }, () => console.log('Connected to MongoDB')
-)
+})
+.then(() => console.log('Connected to MongoDB'))
+.catch((error) => console.log(`Error to connect MongoDB: ${error}`)) 
 
 app.listen(PORT, () => {
     console.log(`API running on port ${PORT}`)
