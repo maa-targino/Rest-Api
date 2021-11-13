@@ -8,7 +8,7 @@ mongoose
         useNewUrlParser: true, 
         useUnifiedTopology: true 
 })
-.then(() => console.log('Connected to MongoDB'))
+.then(() => console.log('Connected to MongoDB successfully'))
 .catch((error) => console.log(`Error to connect MongoDB: ${error}`)) 
 
 app.listen(PORT, () => {

@@ -17,6 +17,7 @@
     "nodemon": "^2.0.15"
   },
   "dependencies": {
+    "curl": "^0.1.4",
     "dotenv": "^10.0.0",
     "env": "^0.0.2",
     "morgan": "^1.10.0"
