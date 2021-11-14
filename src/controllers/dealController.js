@@ -1,9 +1,11 @@
 require('dotenv')
-const Deal = require('./model')
-const axios = require('axios')
-const PIPE_TOKEN = process.env.ASDAD
+const Deal = require('../models/Deal')
+const request = require('request')
+// const axios = require('axios')
+const PIPE_URL = process.env.PIPE_URI
+const PIPE_TOKEN = process.env.PIPE_TOKEN
 
-class Controller {
+class dealController {
 
     async status(req, res){
         try {
@@ -19,34 +21,48 @@ class Controller {
 
         const deal = new Deal(req.body)
         try{
-            const saved = await deal.save()
-                return res.status(201).json(saved)
+            const dealSaved = await deal.save()
+                return res.status(201).json(dealSaved)
         }
         catch(error){
             return res.status(400).res.json({"Error":"Registration failed"})
         }
     }
 
-    async getAllDealsPipedrive(req, res){
-
+    async getAllDealsPipedrive(){
+        
         try {
-            const response = await axios.get(`https://kapi.pipedrive.com/api/v1/deals?api_token=${PIPE_TOKEN}`, 
-            {params: {deal: this.deal.body}}
-            ) 
-            return res.status(200).json(response)
-        } 
-        catch (error) {
-            return res.status(400).json({"message":error})
+            await request(`${PIPE_URL}${PIPE_TOKEN}`, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                return console.log(body)
+            }
+        })
+
+        } catch (error) {
+            return console.log(error)
         }
+        
     }
 }
 
-module.exports = new Controller()
+module.exports = new dealController()
 
 
 /** 
 
-// GET ALL DEAS //
+    try {
+        const response = await axios.get(`https://kapi.pipedrive.com/api/v1/deals?api_token=${PIPE_TOKEN}`, 
+        {params: {deal: deal.body}}
+        ) 
+        return res.status(200).json(response)
+    } 
+    catch (error) {
+        return res.status(400).json({"message":error})
+    }
+
+
+
+// GET ALL DEALS //
 
 curl --location --request GET `http://localhost:${PORT}/V1/deals` \
 --data-raw ''
