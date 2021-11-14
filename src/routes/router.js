@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const controller = require('../controllers/dealController')
-const model = require('../models/Deal')
+// const model = require('../models/Deal')
 // const axios = require('axios')
 
 router.get('/status', controller.status)

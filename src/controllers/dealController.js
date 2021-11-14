@@ -1,8 +1,8 @@
 require('dotenv')
 const Deal = require('../models/Deal')
-const request = require('request')
-// const axios = require('axios')
-const PIPE_URL = process.env.PIPE_URI
+// const request = require('request')
+const axios = require('axios')
+const PIPE_URL = process.env.PIPE_URL
 const PIPE_TOKEN = process.env.PIPE_TOKEN
 
 class dealController {
@@ -14,6 +14,21 @@ class dealController {
         } catch (error) {
             res.status(503).json({message:"Service unavailable."})
         }
+    }
+
+    async getAllDealsPipedrive(_, res){
+
+        try {
+            const response = await axios.get(`${PIPE_URL}?api_token=${PIPE_TOKEN}`)
+            return res.json(response.data)
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
+        
+    async saveDealsMongoDb(req, res){
+
     }
 
     async savePostMongoDb(req, res){
@@ -28,26 +43,27 @@ class dealController {
         }
     }
 
-    async getAllDealsPipedrive(_, res){
-        
-        try {
-            await request(`${PIPE_URL}${PIPE_TOKEN}`, function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                return res.status(200).json(body)
-            }
-        })
-
-        } catch (error) {
-            return res.status(400).json({"Error":error})
-        }
-        
-    }
 }
 
 module.exports = new dealController()
 
 
 /** 
+
+try {
+            await request(`${PIPE_URL}${PIPE_TOKEN}`, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    var allDealsPipedrive = res.status(200).json(body)
+                    return allDealsPipedrive
+                }
+            })
+
+            } catch (error) {
+                return res.status(400).json({"Error":error})
+            }
+        }
+
+
 
     try {
         const response = await axios.get(`https://kapi.pipedrive.com/api/v1/deals?api_token=${PIPE_TOKEN}`, 
@@ -158,7 +174,7 @@ curl -X POST "https://bling.com.br/Api/v2/pedido/json/"
 
 // CONVERSOR DE XML: //
 
-async xmlConverter(){
+async jsonToXml(){
     return (`<?xml version="1.0" encoding="UTF-8"?>
         <pedido>
             <cliente>
