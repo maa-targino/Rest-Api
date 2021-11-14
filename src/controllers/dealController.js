@@ -7,13 +7,12 @@ const PIPE_TOKEN = process.env.PIPE_TOKEN
 
 class dealController {
 
-    async status(req, res){
+    async status(_, res){
         try {
             res.status(200).send('Status: API running successfully.')
 
         } catch (error) {
-            console.log(error)
-            res.status(503).json({"Error":"Service unavailable."})
+            res.status(503).json({message:"Service unavailable."})
         }
     }
 
@@ -25,21 +24,21 @@ class dealController {
                 return res.status(201).json(dealSaved)
         }
         catch(error){
-            return res.status(400).res.json({"Error":"Registration failed"})
+            return res.status(400).res.json({message:"Registration failed"})
         }
     }
 
-    async getAllDealsPipedrive(){
+    async getAllDealsPipedrive(_, res){
         
         try {
             await request(`${PIPE_URL}${PIPE_TOKEN}`, function (error, response, body) {
             if (!error && response.statusCode == 200) {
-                return console.log(body)
+                return res.status(200).json(body)
             }
         })
 
         } catch (error) {
-            return console.log(error)
+            return res.status(400).json({"Error":error})
         }
         
     }
