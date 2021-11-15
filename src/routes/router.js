@@ -5,7 +5,8 @@ const controller = require('../controllers/dealController')
 // const axios = require('axios')
 
 router.get('/status', controller.status)
-router.get('/deals', controller.getAllDealsPipedrive)
+router.get('/deals', controller.getAllDealsWon)
 router.post('/post', controller.savePostMongoDb)
 router.post('/register')
+
 module.exports = router

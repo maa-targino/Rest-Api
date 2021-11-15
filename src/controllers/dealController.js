@@ -7,30 +7,21 @@ const PIPE_TOKEN = process.env.PIPE_TOKEN
 
 class dealController {
 
+    //IT VERIFIES IF THE API IS RUNNING
     async status(_, res){
         try {
-            res.status(200).send('Status: API running successfully.')
+            res.status(200).send('API running successfully.')
 
         } catch (error) {
-            res.status(503).json({message:"Service unavailable."})
+            res.status(503).json(error)
         }
     }
 
-    async getAllDealsPipedrive(_, res){
-
-        try {
-            const response = await axios.get(`${PIPE_URL}?api_token=${PIPE_TOKEN}`)
-            return res.json(response.data)
-        }
-        catch (err) {
-            console.log(err)
-        }
-    }
-        
-    async saveDealsMongoDb(req, res){
+    async postNewDealPipedrive(){
 
     }
 
+    // SALVA UM POST REQUEST DE UM DEAL EM JSON NO DATABASE
     async savePostMongoDb(req, res){
 
         const deal = new Deal(req.body)
@@ -43,6 +34,18 @@ class dealController {
         }
     }
 
+    // IT RETURNS A JSON WITH ALL WON DEALS
+    async getAllDealsWon(_, res){
+        try {
+            const response = await axios.get(`${PIPE_URL}?status=Won&api_token=${PIPE_TOKEN}`)
+            const deals = res.json(response.data)
+            return deals
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
+
 }
 
 module.exports = new dealController()
@@ -51,17 +54,79 @@ module.exports = new dealController()
 /** 
 
 try {
-            await request(`${PIPE_URL}${PIPE_TOKEN}`, function (error, response, body) {
-                if (!error && response.statusCode == 200) {
-                    var allDealsPipedrive = res.status(200).json(body)
-                    return allDealsPipedrive
-                }
-            })
+    const response = await axios.get(`${PIPE_URL}status=Won&api_token=${PIPE_TOKEN}`)
+    console.log(response.data.body.status)
+}
+catch (err) {
+    console.log(err)
+}
 
-            } catch (error) {
-                return res.status(400).json({"Error":error})
-            }
+
+// AXIOS GET REQUEST //
+
+const data = ''
+    const config = {
+    method: 'get',
+    url: `${PIPE_URL}?api_token=${PIPE_TOKEN}`,
+    headers: { },
+    data : data
+    }
+
+    axios(config)
+    .then(function (response) {
+    res.json(response.data)
+    })
+    .catch(function (error) {
+    console.log(error)
+})
+
+
+// AXIOS POST REQUEST //
+
+axios({
+  method: 'post',
+  url: '/user/12345',
+  data: {
+    firstName: 'Fred',
+    lastName: 'Flintstone'
+  }
+});
+
+// AXIOS GET ASYNC AWAIT TRY-CATCH //
+
+try {
+    const response = await axios.get(`${PIPE_URL}?api_token=${PIPE_TOKEN}`)
+    const deals = res.json(response.data)
+    return deals
+}
+catch (err) {
+    console.log(err)
+}
+
+
+
+try {
+    let response = await axios.get(`${PIPE_URL}?api_token=${PIPE_TOKEN}`)
+    let deals = res.json(response.data.body.status)
+    return deals
+}
+catch (err) {
+    console.log(err)
+}
+
+// GET REQUEST WITH NODE-REQUEST //
+
+try {
+    await request(`${PIPE_URL}${PIPE_TOKEN}`, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var allDealsPipedrive = res.status(200).json(body)
+            return allDealsPipedrive
         }
+    })
+
+} catch (error) {
+        return res.status(400).json({"Error":error})
+}
 
 
 
@@ -143,8 +208,6 @@ request(options, function (error, response, body) {
 });
 
 
-
-
 // POST REQUEST NO PIPEDRIVE COM AXIOS: //
 
 axios.post('https://api.pipedrive.com/v1', 
@@ -172,25 +235,26 @@ curl -X POST "https://bling.com.br/Api/v2/pedido/json/"
 
 
 
-// CONVERSOR DE XML: //
+// CONVERSOR: //
 
 async jsonToXml(){
-    return (`<?xml version="1.0" encoding="UTF-8"?>
-        <pedido>
-            <cliente>
-                <id>${body.id}</id>
-                <nome>${body.person_name}</nome>
-            </cliente>
-            <itens>
-                <item>
-                    <codigo>${body.user_id}</codigo>
-                    <descricao>${body.status}</descricao>
-                    <qtde>1</qtde>
-                    <vlr_unit>${body.value}</vlr_unit>
-                </item>
-            </itens>
-        </pedido>
-        `)
+    return (
+        `<?xml version="1.0" encoding="UTF-8"?>
+            <pedido>
+                <cliente>
+                    <id>${body.id}</id>
+                    <nome>${body.person_name}</nome>
+                </cliente>
+                <itens>
+                    <item>
+                        <codigo>${body.user_id}</codigo>
+                        <descricao>${body.status}</descricao>
+                        <qtde>1</qtde>
+                        <vlr_unit>${body.value}</vlr_unit>
+                    </item>
+                </itens>
+            </pedido>`
+    )
 }
 
 
