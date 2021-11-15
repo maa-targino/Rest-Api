@@ -22,4 +22,4 @@ You can download the LTS version of the Node.js source code by clicking [here](h
 
 ### Creating the Database
 
-You can sing-up for MongoDB Atlas to use the free option of its DBaaS by clicking [here](https://www.mongodb.com/atlas-signup-from-mlab) and creating an account.
+You can sing-up for MongoDB Atlas to use the free cloud-hosted option of its DBaaS by clicking [here](https://www.mongodb.com/atlas-signup-from-mlab) and creating an account.
