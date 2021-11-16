@@ -79,9 +79,9 @@ API project to integrate Pipedrive and Bling
 > ### POST /save
 ##### It creates a new resource in a collection on MongoDB Atlas database, with the provided JSON. For more information, access the [MongoDB Documentation](https://docs.atlas.mongodb.com/api/#http-methods).  
   
-## Contacts:  
+## Contact:  
 &nbsp;
-
+### Marco Targino  
 
 <a href="https://mailto:maa.targino@gmail.com">
   <img alt="Gmail" src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" >
