@@ -1,5 +1,5 @@
 require('dotenv')
-const Schema = require('../models/Schema')
+const dealSchema = require('../model/deal-schema')
 const axios = require('axios')
 const PIPE_URL = process.env.PIPE_URL
 const PIPE_TOKEN = process.env.PIPE_TOKEN
@@ -49,10 +49,10 @@ class dealController {
     // IT SAVES A DEAL IN THE DATABASE
     async saveDealMongoDb(req, res) {
 
-        const deal = new Schema(req.body)
+        const deal = new dealSchema(req.body)
         try {
             const dealSaved = await deal.save()
-            return res.status(201).json(dealSaved)
+            return res.status(201).json(dealSaved) //It returns the 
         }
         catch(error){
             return res.status(400).json(error)

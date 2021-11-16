@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const Schema = mongoose.Schema({
+const dealSchema = mongoose.Schema({
     title: {type: String, required: true},
     status:{type: String, required: true},
     value: {type: String, required: true},
@@ -8,4 +8,4 @@ const Schema = mongoose.Schema({
     add_time: {type: Date, default: Date.now}
 })
 
-module.exports = mongoose.model('Deals', Schema)
+module.exports = mongoose.model('Deals', dealSchema)
