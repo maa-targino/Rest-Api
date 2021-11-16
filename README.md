@@ -20,6 +20,10 @@ API project to integrate Pipedrive and Bling
 
 - You can download the LTS version of the Node.js source code by clicking [here](https://nodejs.org/en/download/) and accessing its download page.
 
+#### Installing API Client
+
+- You can download the [Insomnia](https://insomnia.rest/download) or [Postman](https://www.postman.com/downloads/) API client for thesting the HTTP requests.
+
 #### Creating the Database
 
 - You can sing-up for MongoDB Atlas to use the free cloud-hosted option of its DBaaS by clicking [here](https://www.mongodb.com/atlas-signup-from-mlab) and creating an account.
@@ -40,6 +44,8 @@ API project to integrate Pipedrive and Bling
 
 - After that, run `npm init` to initialize its packages.
 
+- If you prefer, you can also use the **yarn** package manager running `npm install --global yarn`.
+
 - You can add an `.env` file and load your environment variables using the **dotenv** module. Run  `npm install dotenv` to install it.
 
 - The **nodemon** is a tool that restarts applications after file changes. Run `npm install --save-dev nodemon` to install it.
@@ -50,26 +56,43 @@ API project to integrate Pipedrive and Bling
 
 ## Endpoints:
 
-> GET /status
+> ### GET /status
+##### Is returns the current status of the API.  
+&nbsp;
 
-##### Is returns the current status of the API.
+> ### GET /deals 
+##### It lists all deals from Pipedrive. For more information, access this [documentation](https://developers.pipedrive.com/docs/api/v1/Deals#getDeals) on Pipedrive Developers.  
+&nbsp;
 
-> GET /deals 
+> ### GET /deals/won
+##### It only fetches deals with status 'won'. The status is a query parameter that can be supplied in the request to return deals with specific status.  
+&nbsp;
 
-##### It lists all deals from Pipedrive. For more information, access this [documentation](https://developers.pipedrive.com/docs/api/v1/Deals#getDeals) on Pipedrive Developers.
+> ### POST /deals
+##### It creates a new deal on Pipedrive with the fields informaton that were supplied. For more information, access this [documentation](https://developers.pipedrive.com/docs/api/v1/Deals#addDeal) on Pipedrive Developers.  
+&nbsp;
 
-> GET /deals/won
+> ### POST /orders
+##### It creates an order request on Bling with the provided fields. For more information, access this [documentation](https://ajuda.bling.com.br/hc/pt-br/articles/360047064693-POST-pedido) on Bling Ajuda.  
+&nbsp;
 
-##### It only fetches deals with status 'won'. The status is a query parameter that can be supplied in the request to return deals with specific status.
+> ### POST /save
+##### It creates a new resource in a collection on MongoDB Atlas database, with the provided JSON. For more information, access the [MongoDB Documentation](https://docs.atlas.mongodb.com/api/#http-methods).  
+  
+## Contact:  
+&nbsp;
+### Marco Targino  
 
-> POST /deals
+<a href="https://mailto:maa.targino@gmail.com">
+  <img alt="Gmail" src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" >
+</a>
+<a href="https://www.linkedin.com/in/marcotargino/">
+  <img alt="Linkedin" src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" >
+</a>
+<a href="https://github.com/ma-targino">
+  <img alt="GitHub" src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" >
+</a>
+<a href="https://stackoverflow.com/users/17340738/marco-targino">
+  <img alt="Stack Overflow" src="https://img.shields.io/badge/Stack_Overflow-FE7A16?style=for-the-badge&logo=stack-overflow&logoColor=white" >
+</a>
 
-##### It creates a new deal on Pipedrive with the fields informaton that were supplied. For more information, access this [documentation](https://developers.pipedrive.com/docs/api/v1/Deals#addDeal) on Pipedrive Developers.
-
-> POST /orders
-
-##### It creates an order request on Bling with the provided fields. For more information, access this [documentation](https://ajuda.bling.com.br/hc/pt-br/articles/360047064693-POST-pedido) on Bling Ajuda.
-
-> POST /save
-
-##### It creates a new resource in a collection on MongoDB Atlas database, with the provided JSON. For more information, access the [MongoDB Documentation](https://docs.atlas.mongodb.com/api/#http-methods).
