@@ -1,12 +1,13 @@
 const express = require('express')
 const router = express.Router()
-const controller = require('../controllers/dealController')
-// const model = require('../models/Deal')
-// const axios = require('axios')
+const dealController = require('../controllers/dealController')
+const orderController = require('../controllers/orderController')
 
-router.get('/status', controller.status)
-router.get('/deals', controller.getAllDealsWon)
-router.post('/post', controller.savePostMongoDb)
-router.post('/register')
+router.get('/status', dealController.status)
+router.get('/deals', dealController.getAllDeals)
+router.get('/deals/won', dealController.getAllDealsWon)
+router.post('/deals', dealController.postNewDeal)
+router.post('/database', dealController.saveDealMongoDb)
+router.post('/orders', orderController.postOrder)
 
 module.exports = router
